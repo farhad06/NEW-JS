@@ -15,4 +15,4 @@ route.get('/show-form', SignInController.showForm);
 route.post('/submit-reg-form', SignInController.submitRegForm);
 
 
-module.exports = route;
+module.exports = route; 

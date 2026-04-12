@@ -137,3 +137,9 @@ dist
 # Vite logs files
 vite.config.js.timestamp-*
 vite.config.ts.timestamp-*
+
+./day1/node_modules
+./day2/node_modules
+./day3/node_modules
+./day4/node_modules
+./day5/node_modules

@@ -5,17 +5,13 @@ const User = sequelize.define(
     'User',
     {
         // Model attributes are defined here
-        firstName: {
-            type: DataTypes.STRING,
-            allowNull: false,
+        name: DataTypes.TEXT,
+        favoriteColor: {
+            type: DataTypes.TEXT,
+            defaultValue: 'green',
         },
-        lastName: {
-            type: DataTypes.STRING,
-            // allowNull defaults to true
-        },
-        email: {
-            type: DataTypes.STRING
-        }
+        age: DataTypes.INTEGER,
+        cash: DataTypes.INTEGER,
     },
     {
         // Other model options go here
@@ -27,11 +23,11 @@ const User = sequelize.define(
 
         // ✅ Add these options
         timestamps: true,        // enable createdAt & updatedAt
-        createdAt: 'createdAt',  // keep the column name
-        updatedAt: 'updatedAt',
+        //createdAt: 'createdAt',  // keep the column name
+        //updatedAt: 'updatedAt',
 
         // ✅ This stores as UNIX integer timestamp instead of DATETIME
-        underscored: false,
+        underscored: true,
 
     },
 );

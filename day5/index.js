@@ -5,6 +5,8 @@ const { engine } = require('express-handlebars');
 const app = express();
 const session = require('express-session');
 const flash = require('connect-flash');
+const logger = require('./utils/logger');
+const path = require('path');
 
 const { succSession, errorSession } = require('./Middleware/session');
 
@@ -37,7 +39,9 @@ app.set('views', './views');
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(express.static('public'));
+//app.use('public/', express.static('public'));
+
+app.use(express.static(path.join(__dirname, 'public')));
 
 
 const webRoutes = require('./routes/web');
@@ -49,6 +53,12 @@ app.use((req, res) => {
     res.status(404).render('404', { title: 'Not Found' });
 });
 
-app.listen(port, () => {
+const server = app.listen(port, () => {
     console.log(`${appName} running at port ${port}`);
+});
+
+// Handle unhandled promise rejections
+process.on('unhandledRejection', (err) => {
+    logger.error("Some Unhandle Promises ", err);
+    server.close(() => process.exit(1));
 });

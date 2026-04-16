@@ -1,5 +1,6 @@
+<a href="/show-form" class="btn btn-primary mb-3">Add</a>
+<a href="/" class="btn btn-dark mb-3 ms-2">Home</a>
 <h1 class="mb-4">{{title}}</h1>
-
 <table class="table table-bordered table-hover">
     <thead class="table-dark">
         <tr>
@@ -7,6 +8,7 @@
             <th>Name</th>
             <th>Email</th>
             <th>Address</th>
+            <th>Image</th>
             <th>Action</th>
         </tr>
     </thead>
@@ -18,7 +20,13 @@
             <td>{{this.email}}</td>
             <td>{{this.address}}</td>
             <td>
-                <a href="/users/{{this.id}}" class="btn btn-sm btn-info">View</a>
+                {{!-- <img src="/uploads/images/{{this.profile_photo}}" alt="Profile Photo" width="80px"> --}}
+                <img src="{{this.profile_photo}}" alt="Profile Photo" width="80px">
+            </td>
+            <td>
+                <a href="/user/{{this.id}}" class="btn btn-sm btn-info">View</a>
+                <a href="/user/delete/{{this.id}}" class="btn btn-sm btn-danger ms-2"
+                    onclick="return confirm('Are You Sure Delete this record?')">Delete</a>
             </td>
         </tr>
         {{/each}}

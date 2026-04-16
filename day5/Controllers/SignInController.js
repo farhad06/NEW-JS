@@ -1,5 +1,6 @@
 const db = require('../db/dbConn');
 const bcypt = require('bcrypt');
+const logger = require('../utils/logger')
 
 const SignInController = {
     showForm: (req, res) => {
@@ -9,22 +10,23 @@ const SignInController = {
     submitRegForm: async (req, res) => {
 
         const { name, email, password, address } = req.body;
+        const fileName = req.file ? `/uploads/images/${req.file.filename}` : null;
 
-        const hashedPassword = await bcypt.hash(address, 10)
+        const hashedPassword = await bcypt.hash(password, 10)
 
         try {
 
             await db.execute(
-                "INSERT INTO users (name, email, password, address) VALUES (?,?,?,?)", [name, email, hashedPassword, address]
+                "INSERT INTO users (name, email, password, address,profile_photo) VALUES (?,?,?,?,?)", [name, email, hashedPassword, address, fileName]
             );
 
             req.flash('success', 'User Saved Successfully');
-            res.redirect('/');
+            res.redirect('/users');
 
         } catch (err) {
-            console.log(err);
+            logger.error(err);
             req.flash('error', 'Something Went Wrong');
-            res.redirect('/')
+            res.redirect('/users')
         }
 
     }

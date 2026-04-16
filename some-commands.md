@@ -9,11 +9,3 @@ sudo /opt/lampp/lampp start
 ```
 sudo /opt/lampp/lampp stop
 ```
-#### Store Git Credential
-```
-git config --global credential.helper store
-```
-#### Show Stored Credentials
-```
-~/.git-credentials
-```

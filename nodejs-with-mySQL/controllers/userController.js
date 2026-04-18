@@ -1,3 +1,4 @@
+const { sequelize } = require('../config/dbConnection');
 const { User } = require('../models/userModal');
 const userController = {
     insert: async (req, res) => {
@@ -21,6 +22,21 @@ const userController = {
             res.send('Data Saved');
         } catch (err) {
             console.error('Data Save Error', err);
+        }
+    },
+    showAllUser: async (req, res) => {
+        try {
+            //const data = await User.findAll({ order: [['id', 'DESC']] });
+            //const data = await User.findAll({ attributes: ['name', 'age'] })
+            //const data = await User.findAll({ attributes: [['name', 'user_name'], 'age'], order: [['id', 'DESC']] })
+            //const data = await User.findAll({ attributes: ['name', [sequelize.fn('COUNT', sequelize.col('id')), 'number_of_user'], 'age'] });
+            //const data = await User.findAll({ attributes: { exclude: ['id'] } });
+
+            const data = await User.findAll({ where: { id: 2 } });
+            res.json(data);
+        } catch (err) {
+            console.error('Data fetch error: ', err);
+
         }
     }
 }

@@ -3,7 +3,8 @@ const { Sequelize } = require('sequelize');
 const sequelize = new Sequelize('node_app', 'root', '', {
     host: 'localhost',
     port: 3306,
-    dialect: 'mysql'
+    dialect: 'mysql',
+    logging: false
 });
 
 const dbConnection = async () => {

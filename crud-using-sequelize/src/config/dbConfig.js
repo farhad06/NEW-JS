@@ -1,0 +1,27 @@
+import { Sequelize } from "sequelize";
+
+const sequelize = new Sequelize(
+    process.env.DB_NAME,
+    process.env.DB_USER,
+    process.env.DB_PASS,
+    {
+        host: process.env.DB_HOST,
+        port: process.env.DB_PORT,
+        dialect: process.env.DB_CONN,
+        logging: false,
+        //logging: process.env.APP_ENV == 'development' ? true : false
+    }
+)
+
+
+const dbConnect = async () => {
+    try {
+        await sequelize.authenticate();
+        console.log(`DB Connect Successfully`);
+    } catch (err) {
+        console.error(`Error While Connect DB`, err);
+
+    }
+}
+
+export { sequelize, dbConnect }

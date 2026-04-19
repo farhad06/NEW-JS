@@ -2,6 +2,7 @@ import express from 'express';
 const app = express();
 import userRoutes from './routes/router.js';
 import User from './models/userModel.js';
+import Employee from './models/employee.js';
 
 
 app.use(express.json());
@@ -10,6 +11,8 @@ app.use(express.urlencoded({ extended: true }))
 app.use('/users', userRoutes);
 
 //User.sync({ force: true });
+//Employee.sync({ force: true });
+
 
 app.use((req, res) => {
     console.log(`❌ 404 - Route not found: ${req.method} ${req.url}`);

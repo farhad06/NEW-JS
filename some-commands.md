@@ -17,3 +17,15 @@ git config --global credential.helper store
 ```
 ~/.git-credentials
 ```
+#### Start MongoDB 
+```
+sudo systemctl start mongod
+sudo systemctl enable mongod --- Not Need It Start in  when system start 
+```
+
+#### Start Mongodb Compass
+```
+mongodb-compass
+```
+sudo systemctl stop mongod
+``` 

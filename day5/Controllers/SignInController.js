@@ -1,6 +1,7 @@
 const db = require('../db/dbConn');
 const bcypt = require('bcrypt');
-const logger = require('../utils/logger')
+const logger = require('../utils/logger');
+const sendMail = require('../utils/sendMail');
 
 const SignInController = {
     showForm: (req, res) => {
@@ -29,6 +30,21 @@ const SignInController = {
             res.redirect('/users')
         }
 
+    },
+    sendMail: async (req, res) => {
+        try {
+            const name = 'Farhad';
+            const email = ['farhad.ahamed@webstep.in', 'iamfarhad06@gmail.com'];
+            const subject = 'This is my first mail from nodeJs';
+
+            await sendMail(email, subject, name);
+
+            res.send('Mail Send Successfully');
+
+        } catch (err) {
+            //console.error(err);
+            logger.error('Send Mail Error', err);
+        }
     }
 }
 

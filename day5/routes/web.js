@@ -15,6 +15,7 @@ route.get('/greet', checkMiddleWare, UserController.greet);
 
 route.get('/show-form', SignInController.showForm);
 route.post('/submit-reg-form', uploadMiddleWare.single('profile_photo'), SignInController.submitRegForm);
+route.get('/send-mail', SignInController.sendMail);
 
 
 module.exports = route;

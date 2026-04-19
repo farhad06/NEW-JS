@@ -59,7 +59,7 @@ const UserController = {
 
                 if (fs.existsSync(filePath)) {
                     //fs.unlinkSync(filePath);
-
+                    
                     fs.unlink(filePath, (err) => {
                         if (err) logger.error('File delete error', err);
                     });

@@ -27,5 +27,7 @@ sudo systemctl enable mongod --- Not Need It Start in  when system start
 ```
 mongodb-compass
 ```
+#### Stop Mongodb Compass
+```
 sudo systemctl stop mongod
 ``` 

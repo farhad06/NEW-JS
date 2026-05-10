@@ -2,12 +2,17 @@ import express from "express";
 import router from "./routes/router.js";
 import session from "express-session";
 import MongoStore from "connect-mongo";
+import cookieParser from "cookie-parser";
+import cookieRoutes from "./routes/cookie.js"
 
 const app = express();
 
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
+//app.use(cookieParser());
+//app.use(cookieParser('mySectectKey')); // Signed  Cookie Parser
 
 app.use(session({
     secret: "mysecretkey",
@@ -27,5 +32,6 @@ app.use(session({
 
 
 app.use("/users", router);
+app.use("/", cookieRoutes);
 
 export default app;

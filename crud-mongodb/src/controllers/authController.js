@@ -1,5 +1,6 @@
 import bcrypt from "bcryptjs";
 import User from "../models/user.js";
+import generateToken from "../utils/generateToken.js";
 
 const authController = {
     login: async (req, res, next) => {
@@ -31,9 +32,12 @@ const authController = {
                 email: user.email
             }
 
+            const token = generateToken(user._id);
+
             return res.status(200).json({
                 status: true,
                 message: 'Logged in successfuly',
+                token: token,
                 user: req.session.user
             })
 

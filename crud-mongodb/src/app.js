@@ -5,6 +5,7 @@ import MongoStore from "connect-mongo";
 import cookieParser from "cookie-parser";
 import cookieRoutes from "./routes/cookie.js"
 import authRoutes from "./routes/auth.js";
+import fileRoutes from "./routes/files.js";
 
 const app = express();
 
@@ -33,7 +34,8 @@ app.use(session({
 
 
 app.use("/users", router);
-app.use("/", cookieRoutes);
+app.use("/cookie", cookieRoutes);
 app.use("/user", authRoutes);
+app.use('/', fileRoutes);
 
 export default app;

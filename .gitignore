@@ -143,3 +143,5 @@ vite.config.ts.timestamp-*
 ./day3/node_modules
 ./day4/node_modules
 ./day5/node_modules
+
+News-Blog-CMS/public/upload

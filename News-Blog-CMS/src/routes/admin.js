@@ -24,7 +24,7 @@ router.get('/users', userController.allUsers);
 router.get('/add-user', userController.addUserForm);
 router.post('/add-user', userController.addUser);
 router.get('/update-user/:id', userController.updateUserForm);
-router.post('/update-user/:id', userController.updateUser);
+router.post('/update-user', userController.updateUser);
 router.delete('/delete-user/:id', userController.deleteUser);
 
 //Category CRUD Routes

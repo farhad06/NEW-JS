@@ -17,7 +17,7 @@ const appName = process.env.APP_NAME
 app.engine('hbs', engine({
     extname: '.hbs',
     defaultLayout: 'main',
-    layoutsDir: './views/layouts',
+    layoutsDir: './views/layouts', 
     partialsDir: './views/partials'
 }))
 

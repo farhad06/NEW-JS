@@ -5,10 +5,10 @@ const userController = {
     allUsers: async (req, res) => {
         const users = await User.find();
 
-        res.render('admin/users', { users: users })
+        res.render('admin/users', { users: users, role: req.role })
     },
     addUserForm: async (req, res) => {
-        res.render('admin/users/create')
+        res.render('admin/users/create', { role: req.role })
     },
     addUser: async (req, res) => {
         try {
@@ -28,7 +28,7 @@ const userController = {
                 req.flash('error', 'User Not Found');
                 return res.redirect('/admin/users');
             }
-            res.render('admin/users/update', { user: user });
+            res.render('admin/users/update', { user: user, role: req.role });
         } catch (err) {
             logger.error(err.message)
             req.flash('error', err.message);

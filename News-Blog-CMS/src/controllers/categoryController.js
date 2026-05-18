@@ -1,5 +1,6 @@
 const categoryController = {
     allCategories: async (req, res) => {
+        res.render('admin/categories/index', { role: req.role });
 
     },
     addCategoryForm: async (req, res) => {

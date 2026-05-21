@@ -3,6 +3,7 @@ const articleController = {
         res.render('admin/articles/index', { role: req.role });
     },
     addArticleForm: async (req, res) => {
+        res.render('admin/articles/create', { role: req.role });
 
     },
     addArticle: async (req, res) => {

@@ -61,6 +61,16 @@
 
   <%- typeof tabulatorJS == 'undefined' ? '' : tabulatorJS %>
   <script src="/js/bootstrap.bundle.min.js"></script>
+  <script>
+    const msgCloseBtn = document.querySelector('.msg-close-btn');
+
+    setTimeout(() => {
+        if (msgCloseBtn) {
+            msgCloseBtn.click();
+        }
+    }, 5000);
+
+</script>
   <!-- /Footer -->
 </body>
 

@@ -12,14 +12,25 @@ const categorySchema = new mongoose.Schema({
     },
     slug: {
         type: String,
-        required: true,
+        //required: true,
         unique: true
     },
 }, { timestamps: true });
 
-categorySchema.pre('validate', function (next) {
-    this.slug = slugify(this.name, { lower: true });
-    next();
+// categorySchema.pre('validate', function (next) {
+//     this.slug = slugify(this.name, { lower: true });
+//     next();
+// });
+
+categorySchema.pre('save', function () {
+
+    if (this.name) {
+
+        this.slug = slugify(this.name, {
+            lower: true,
+            strict: true
+        });
+    }
 });
 
 module.exports = mongoose.model('Category', categorySchema);

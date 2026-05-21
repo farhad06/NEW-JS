@@ -21,7 +21,7 @@ router.get('/logout', auth, authController.logout);
 
 //Setting Routes
 router.get('/settings', auth, isAdmin, settingController.settings);
-router.post('/save-settings', auth, isAdmin, settingController.saveSettings);
+router.post('/save-settings', auth, isAdmin, settingController.saveSettings); 
 
 //User CRUD Routes
 router.get('/users', auth, isAdmin, userController.allUsers);
@@ -36,7 +36,7 @@ router.get('/categories', auth, isAdmin, categoryController.allCategories);
 router.get('/add-category', auth, isAdmin, categoryController.addCategoryForm);
 router.post('/add-category', auth, isAdmin, categoryController.addCategory);
 router.get('/update-category/:id', auth, isAdmin, categoryController.updateCategoryForm);
-router.post('/update-category/:id', auth, isAdmin, categoryController.updateCategory);
+router.post('/update-category', auth, isAdmin, categoryController.updateCategory);
 router.delete('/delete-category/:id', auth, isAdmin, categoryController.deleteCategory);
 
 //Article CRUD Routes

@@ -1,4 +1,6 @@
 const User = require('../models/User.js');
+const Article = require('../models/News.js');
+const Category = require('../models/Category.js');
 const logger = require('../utils/logger.js');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
@@ -34,7 +36,25 @@ const authController = {
         }
     },
     dashboard: async (req, res) => {
-        res.render('admin/dashboard', { role: req.role, fullName: req.fullName });
+        let articleCount;
+
+        if (req.role === 'author') {
+            articleCount = await Article.countDocuments({ author: req.id });
+        } else {
+            articleCount = await Article.countDocuments();
+        }
+
+        const categoryCount = await Category.countDocuments();
+        const userCount = await User.countDocuments();
+
+
+        res.render('admin/dashboard', {
+            role: req.role,
+            fullName: req.fullName,
+            articleCount,
+            categoryCount,
+            userCount
+        });
     },
     logout: async (req, res) => {
         res.clearCookie('token');

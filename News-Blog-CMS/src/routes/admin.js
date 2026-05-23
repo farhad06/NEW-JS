@@ -25,7 +25,7 @@ router.get('/logout', auth, authController.logout);
 
 //Setting Routes
 router.get('/settings', auth, isAdmin, settingController.settings);
-router.post('/save-settings', auth, isAdmin, settingController.saveSettings);
+router.post('/save-settings', auth, isAdmin, uploadFile.single('website_logo'), settingController.saveSettings);
 
 //User CRUD Routes
 router.get('/users', auth, isAdmin, userController.allUsers);

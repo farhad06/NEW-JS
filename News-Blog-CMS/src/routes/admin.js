@@ -9,6 +9,10 @@ const commentController = require('../controllers/commentController.js');
 const authController = require('../controllers/authController.js')
 const settingController = require('../controllers/settingController.js');
 
+//Upload File 
+
+const uploadFile = require('../utils/fileUpload.js');
+
 //Middlewars
 const auth = require('../middlewares/auth.js');
 const isAdmin = require('../middlewares/isAdmin.js');
@@ -21,7 +25,7 @@ router.get('/logout', auth, authController.logout);
 
 //Setting Routes
 router.get('/settings', auth, isAdmin, settingController.settings);
-router.post('/save-settings', auth, isAdmin, settingController.saveSettings); 
+router.post('/save-settings', auth, isAdmin, settingController.saveSettings);
 
 //User CRUD Routes
 router.get('/users', auth, isAdmin, userController.allUsers);
@@ -42,9 +46,9 @@ router.delete('/delete-category/:id', auth, isAdmin, categoryController.deleteCa
 //Article CRUD Routes
 router.get('/articles', auth, articleController.allArticles);
 router.get('/add-article', auth, articleController.addArticleForm);
-router.post('/add-article', auth, articleController.addArticle);
+router.post('/add-article', auth, uploadFile.single('image'), articleController.addArticle);
 router.get('/update-article/:id', auth, articleController.updateArticleForm);
-router.post('/update-article/:id', auth, articleController.updateArticle);
+router.post('/update-article', auth, uploadFile.single('image'), articleController.updateArticle);
 router.delete('/delete-article/:id', auth, articleController.deleteArticle);
 
 //Comment Routes

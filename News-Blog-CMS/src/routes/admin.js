@@ -60,6 +60,34 @@ router.put('/update-comment-status/:id', auth, commentController.updateCommentSt
 router.delete('/delete-comment/:id', auth, commentController.deleteComment);
 
 
+//404 Middleware 
+router.use(auth, (req, res, next) => {
+    res.status(404).render('admin/404', { message: 'Page not Found', role: req.role });
+})
+
+//middleware for another status 
+router.use(auth, (err, req, res, next) => {
+    const status = err.status || 500;
+    let view;
+
+    switch (status) {
+        case 401:
+            view = 'admin/401';
+            break;
+        case 404:
+            view = 'admin/404';
+            break;
+        case 500:
+            view = 'admin/500';
+            break;
+        default:
+            view = 'admin/500';
+
+    }
+
+    res.status(status).render(view, { message: err.message || 'Something Wrong', role: req.role })
+});
+
 
 
 module.exports = router;

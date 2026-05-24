@@ -1,4 +1,5 @@
 const Category = require('../models/Category.js');
+const Article = require('../models/News.js');
 const logger = require('../utils/logger.js');
 
 const categoryController = {
@@ -72,10 +73,10 @@ const categoryController = {
                 req.flash('error', "Category not found");
                 return res.redirect('/admin/categories');
             }
-            // const article = await newsModel.findOne({ category: id });
-            // if (article) {
-            //     return res.status(400).json({ success: false, message: 'Category is associated with an article' });
-            // }
+            const article = await Article.findOne({ category: id });
+            if (article) {
+                return res.status(400).json({ success: false, message: 'Category is associated with an article' });
+            }
 
             await category.deleteOne();
 

@@ -1,4 +1,5 @@
 const User = require('../models/User.js');
+const Article = require('../models/News.js');
 const logger = require('../utils/logger.js')
 
 const userController = {
@@ -74,10 +75,10 @@ const userController = {
                 return res.redirect('/admin/users');
             }
 
-            // const article = await newsModel.findOne({ author: id });
-            // if (article) {
-            //     return res.status(400).json({ success: false, message: 'User is associated with an article' });
-            // }
+            const article = await Article.findOne({ author: id });
+            if (article) {
+                return res.status(400).json({ success: false, message: 'User is associated with an article' });
+            }
 
             await user.deleteOne();
 

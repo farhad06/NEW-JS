@@ -1,0 +1,28 @@
+<!-- partials/failed-err-message.ejs -->
+
+<!-- General error flash (e.g. from controller catch blocks) -->
+<% if (error) { %>
+    <div class="alert alert-danger mt-3">
+        <%= error %>
+    </div>
+<% } %>
+
+<!-- General success flash -->
+<% if (success) { %>
+    <div class="alert alert-success mt-3">
+        <%= success %>
+    </div>
+<% } %>
+
+<!-- Validation errors (from express-validator) -->
+<% if (Object.keys(errors).length > 0) { %>
+    <div class="alert alert-danger mt-3">
+        <ul class="mb-0">
+            <% Object.values(errors).forEach(fieldErrors => { %>
+                <% fieldErrors.forEach(msg => { %>
+                    <li><%= msg %></li>
+                <% }) %>
+            <% }) %>
+        </ul>
+    </div>
+<% } %>

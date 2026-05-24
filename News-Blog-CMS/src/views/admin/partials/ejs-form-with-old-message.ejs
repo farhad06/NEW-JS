@@ -1,0 +1,63 @@
+<form action="/admin/add-user" method="POST" autocomplete="off">
+
+    <!-- Full Name -->
+    <div class="mb-3">
+        <label class="form-label">Full Name</label>
+        <input
+            type="text"
+            name="fullName"
+            value="<%= old.fullName || '' %>"
+            class="form-control <%= errors.fullName ? 'is-invalid' : '' %>"
+            placeholder="Full Name"
+        />
+        <% if (errors.fullName) { %>
+            <div class="invalid-feedback"><%= errors.fullName[0] %></div>
+        <% } %>
+    </div>
+
+    <!-- Username -->
+    <div class="mb-3">
+        <label class="form-label">User Name</label>
+        <input
+            type="text"
+            name="username"
+            value="<%= old.username || '' %>"
+            class="form-control <%= errors.username ? 'is-invalid' : '' %>"
+            placeholder="Username"
+        />
+        <% if (errors.username) { %>
+            <div class="invalid-feedback"><%= errors.username[0] %></div>
+        <% } %>
+    </div>
+
+    <!-- Password -->
+    <div class="mb-3">
+        <label class="form-label">Password</label>
+        <input
+            type="password"
+            name="password"
+            class="form-control <%= errors.password ? 'is-invalid' : '' %>"
+            placeholder="Password"
+        />
+        <% if (errors.password) { %>
+            <div class="invalid-feedback"><%= errors.password[0] %></div>
+        <% } %>
+    </div>
+
+    <!-- Role -->
+    <div class="mb-3">
+        <label class="form-label">User Role</label>
+        <select name="role" class="form-control <%= errors.role ? 'is-invalid' : '' %>">
+            <option value="">Select Role</option>
+            <option value="author"    <%= old.role === 'author' ? 'selected' : '' %>>Author</option>
+            <option value="admin"     <%= old.role === 'admin'  ? 'selected' : '' %>>Administrator</option>
+        </select>
+        <% if (errors.role) { %>
+            <div class="invalid-feedback"><%= errors.role[0] %></div>
+        <% } %>
+    </div>
+
+    <input type="submit" class="btn btn-primary" value="Save" />
+</form>
+
+<%- include('../partials/failed-err-message') %>

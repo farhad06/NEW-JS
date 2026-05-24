@@ -10,12 +10,15 @@ const authController = require('../controllers/authController.js')
 const settingController = require('../controllers/settingController.js');
 
 //Upload File 
-
 const uploadFile = require('../utils/fileUpload.js');
 
 //Middlewars
 const auth = require('../middlewares/auth.js');
 const isAdmin = require('../middlewares/isAdmin.js');
+
+//Validator Message 
+const validate = require('../utils/validate.js');
+const { loginRules, registerRules } = require('../validator/authValidate.js');
 
 //Auth Routes 
 router.get('/', authController.logInPage);

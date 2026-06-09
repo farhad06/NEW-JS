@@ -2,6 +2,9 @@ const { Router } = require('express');
 const siteController = require('../controllers/siteController.js');
 const router = Router();
 
+const loadCommonData = require('../middlewares/loadCommonData.js');
+
+router.use(loadCommonData)
 
 router.get('/', siteController.index);
 router.get('/category/:name', siteController.articleByCategories);

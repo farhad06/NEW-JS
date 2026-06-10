@@ -16,7 +16,25 @@ const siteController = {
         res.render('index', { paginatedNews, query: req.query });
     },
     articleByCategories: async (req, res) => {
-        res.render('category')
+        const category = await Category.findOne({ slug: req.params.name });
+
+        if (!category) {
+            return res.redirect('/');
+        }
+        const paginatedNews = await paginate(
+            News,
+            { category: category._id },
+            req.query,
+            {
+                populate: [
+                    { path: 'category', select: 'name slug' },
+                    { path: 'author', select: 'fullName' }
+                ],
+                sort: '-createdAt'
+            }
+        );
+
+        res.render('category', { paginatedNews, category, query: req.query });
     },
     singleArticle: async (req, res) => {
         const singleNews = await News.findById(req.params.id)
@@ -33,6 +51,25 @@ const siteController = {
     },
     search: async (req, res) => {
 
+        const searchQuery = req.query.search;
+
+        const paginatedNews = await paginate(
+            News,
+            {
+                $or: [
+                    { title: { $regex: searchQuery, $options: 'i' } },
+                    { content: { $regex: searchQuery, $options: 'i' } },
+                ]
+            },
+            req.query, {
+            populate: [
+                { path: 'category', select: 'name slug' },
+                { path: 'author', select: 'fullName' }
+            ]
+        }
+        )
+
+        res.render('search', { searchQuery, paginatedNews, query: req.query })
     },
     author: async (req, res) => {
         const author = await User.find({ _id: req.params.name });

@@ -1,6 +1,7 @@
 const Category = require('../models/Category.js');
 const News = require('../models/News.js');
 const User = require('../models/User.js');
+const Comment = require('../models/Comment.js');
 const paginate = require('../utils/paginate.js');
 
 const siteController = {
@@ -46,8 +47,10 @@ const siteController = {
             return res.redirect('/');
         }
 
-        //res.json(singleNews)
-        res.render('single', { singleNews });
+        const comments = await Comment.find({ article: req.params.id, status: 'approved' }).sort('-createdAt');
+
+        //return res.json(comments);
+        res.render('single', { singleNews, comments });
     },
     search: async (req, res) => {
 
@@ -89,6 +92,10 @@ const siteController = {
         res.render('author', { paginatedNews, author, query: req.query })
     },
     addComment: async (req, res) => {
+        const { name, email, content } = req.body;
+        const comment = new Comment({ name, email, content, article: req.params.id });
+        await comment.save();
+        res.redirect(`/single/${req.params.id}`);
 
     },
 }
